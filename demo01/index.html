@@ -1,24 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script>
-		function appendStylesheet() {
-		const link = document.createElement("link");
-		link.rel="stylesheet";
-		link.type="text/css";
-		link.href="./styles.css";
-		document.getElementsByTagName("head")[0].append(link);			
+	<link rel="stylesheet" type="text/css" href="./styles.css">
+	<script type="text/javascript">
+		function addScrollingListener() {
+			// Setup isScrolling variable
+			var isScrolling;
+
+			// Listen for scroll events
+			window.addEventListener('scroll', function ( event ) {
+				document.querySelector(".button").classList.add("is-hidden");
+				document.querySelector(".button").classList.remove("is-visible");
+				// Clear our timeout throughout the scroll
+				window.clearTimeout( isScrolling );
+
+				// Set a timeout to run after scrolling ends
+				isScrolling = setTimeout(function() {
+
+					// Run the callback
+					console.log( 'Scrolling has stopped.' );
+					document.querySelector(".button").classList.add("is-visible");
+					document.querySelector(".button").classList.remove("is-hidden");
+
+				}, 66);
+
+			}, false);
 		}
 	</script>
 	<title></title>
 </head>
 <body>
-	<div class="myClass">Hallo Welt</div>
-<script type="text/javascript">
-	(
-		console.log("hello world"),
-		appendStylesheet()
-	);
-</script>
+	<div class="button">Hallo Welt</div>
+	<script type="text/javascript">
+		(
+			addScrollingListener()
+		);
+	</script>
 </body>
 </html>
